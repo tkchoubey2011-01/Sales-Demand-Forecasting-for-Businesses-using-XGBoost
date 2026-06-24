@@ -63,9 +63,19 @@ The model successfully captured major sales trends and explained approximately 6
 
 The forecast can help businesses anticipate future demand and make informed operational decisions.
 
-## Business Impact
+## Conclusion
 
-Businesses can use this model to:
+An XGBoost-based forecasting system was developed using historical retail sales data.
+
+The model achieved:
+
+- MAE: 12,561.66
+- RMSE: 14,850.87
+- R²: 0.6459
+
+Results indicate that sales exhibit strong seasonal patterns, with month and recent sales trends being the most important predictors.
+
+Businesses can use these forecasts to improve inventory management, staffing, and budgeting decisions.
 
 - Predict future sales
 - Improve inventory management
