@@ -11,7 +11,15 @@ uploaded_file = st.file_uploader(
 
 if uploaded_file:
 
-    df = pd.read_csv(uploaded_file, encoding="latin1")
+    try:
+    df = pd.read_csv(uploaded_file, encoding="utf-8")
+except:
+    uploaded_file.seek(0)
+    try:
+        df = pd.read_csv(uploaded_file, encoding="latin1")
+    except:
+        uploaded_file.seek(0)
+        df = pd.read_csv(uploaded_file, encoding="cp1252")
     st.subheader("Dataset Preview")
 
     st.dataframe(df.head())
