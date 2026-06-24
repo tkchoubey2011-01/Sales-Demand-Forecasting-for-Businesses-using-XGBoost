@@ -13,7 +13,7 @@ if uploaded_file:
 
     try:
     df = pd.read_csv(uploaded_file, encoding="utf-8")
-except:
+    except:
     uploaded_file.seek(0)
     try:
         df = pd.read_csv(uploaded_file, encoding="latin1")
