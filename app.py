@@ -11,8 +11,7 @@ uploaded_file = st.file_uploader(
 
 if uploaded_file:
 
-    df = pd.read_csv(uploaded_file)
-
+    df = pd.read_csv(uploaded_file, encoding="latin1")
     st.subheader("Dataset Preview")
 
     st.dataframe(df.head())
