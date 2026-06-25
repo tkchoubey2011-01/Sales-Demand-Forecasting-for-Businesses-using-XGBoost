@@ -9,22 +9,40 @@ uploaded_file = st.file_uploader(
     type=["csv"]
 )
 
-if uploaded_file:
+if uploaded_file is not None:
 
     try:
-    df = pd.read_csv(uploaded_file, encoding="utf-8")
-    except:
-    uploaded_file.seek(0)
-    try:
-        df = pd.read_csv(uploaded_file, encoding="latin1")
-    except:
+        df = pd.read_csv(uploaded_file, encoding="utf-8")
+
+    except UnicodeDecodeError:
+
         uploaded_file.seek(0)
-        df = pd.read_csv(uploaded_file, encoding="cp1252")
+
+        try:
+            df = pd.read_csv(
+                uploaded_file,
+                encoding="latin1"
+            )
+
+        except:
+
+            uploaded_file.seek(0)
+
+            df = pd.read_csv(
+                uploaded_file,
+                encoding="cp1252"
+            )
+
     st.subheader("Dataset Preview")
 
     st.dataframe(df.head())
 
-    df["Order Date"] = pd.to_datetime(df["Order Date"])
+    df["Order Date"] = pd.to_datetime(
+        df["Order Date"],
+        errors="coerce"
+    )
+
+    df = df.dropna(subset=["Order Date"])
 
     monthly_sales = (
         df.groupby(
