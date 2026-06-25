@@ -16,7 +16,7 @@ st.set_page_config(
     layout="wide"
 )
 
-st.title("📈 Sales Forecasting Dashboard")
+st.title("Sales Forecasting Dashboard")
 
 uploaded_file = st.file_uploader(
     "Upload Superstore CSV",
