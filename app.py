@@ -44,15 +44,17 @@ if uploaded_file is not None:
 
     df = df.dropna(subset=["Order Date"])
 
+    df["YearMonth"] = df["Order Date"].dt.to_period("M")
+
     monthly_sales = (
-        df.groupby(
-            pd.Grouper(
-                key="Order Date",
-                freq="M"
-            )
-        )["Sales"]
+        df.groupby("YearMonth")["Sales"]
         .sum()
         .reset_index()
+    )
+
+    monthly_sales["Order Date"] = (
+    monthly_sales["YearMonth"]
+        .dt.to_timestamp()
     )
 
     fig, ax = plt.subplots(figsize=(10,4))
